@@ -1,12 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Home from "./components/Home";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { signIn } from "./utils/auth_signing_password";
+import NotAuthenticated from "./components/NotAuthenticated";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./utils/firebase";
+import SignOrRegister from "./components/SignOrRegister";
 
-signIn("", "");
+export type User = {
+  email?: string;
+  password?: string;
+};
 
 function App() {
-  return <Home />;
+  const [user, setUser] = React.useState<any>(null);
+  useEffect(() => {
+    const listen = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log("user", user);
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
+
+    return () => {
+      listen();
+    };
+  }, []);
+
+  return <Home user={user} />;
 }
 
 export default App;
