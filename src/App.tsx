@@ -1,7 +1,12 @@
 import React from "react";
+import Home from "./components/Home";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { signIn } from "./utils/auth_signing_password";
+
+signIn("", "");
 
 function App() {
-  return <h1 className="text-4xl">Hello world!!</h1>;
+  return <Home />;
 }
 
 export default App;
