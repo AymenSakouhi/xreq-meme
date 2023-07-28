@@ -1,10 +1,7 @@
 import React, { useEffect } from "react";
 import Home from "./components/Home";
-import { signIn } from "./utils/auth_signing_password";
-import NotAuthenticated from "./components/NotAuthenticated";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./utils/firebase";
-import SignOrRegister from "./components/SignOrRegister";
 
 export type User = {
   email?: string;
